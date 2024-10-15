@@ -30,30 +30,28 @@ let startX;
 
 // Array com a ordem das páginas (incluindo o caminho relativo)
 const pages = [
-    "../index.html",
-    "../nav.html",
-    "../capitulos/capitulo1.html",
-    "../capitulos/capitulo2.html"
-    
+    "index.html",
+    "nav.html",
+    "capitulos/capitulo1.html",
+    "capitulos/capitulo2.html",
+    // Adicione mais capítulos conforme necessário
+    "capitulos/capitulo25.html"
 ];
 
 // Função para obter o índice da página atual
 function getCurrentPageIndex() {
-    const currentPage = window.location.pathname.split("/").pop();
-    
-    // Para capitulos/, ajusta para o nome da página atual
-    if (window.location.pathname.includes("capitulos/")) {
-        return pages.indexOf(currentPage);
-    } else {
-        return pages.indexOf("../" + currentPage);
-    }
+    // Obtém o caminho completo da página atual (incluindo o diretório)
+    const currentPage = window.location.pathname;
+
+    // Procura no array de páginas o caminho completo da página atual
+    return pages.findIndex(page => currentPage.endsWith(page));
 }
 
 // Função para navegar para a página anterior
 function goToPreviousPage() {
     const currentIndex = getCurrentPageIndex();
     if (currentIndex > 0) {
-        window.location.href = (currentIndex > 1 ? "capitulos/" : "") + pages[currentIndex - 1];
+        window.location.href = pages[currentIndex - 1];
     }
 }
 
@@ -61,7 +59,7 @@ function goToPreviousPage() {
 function goToNextPage() {
     const currentIndex = getCurrentPageIndex();
     if (currentIndex < pages.length - 1) {
-        window.location.href = (currentIndex >= 1 ? "capitulos/" : "") + pages[currentIndex + 1];
+        window.location.href = pages[currentIndex + 1];
     }
 }
 

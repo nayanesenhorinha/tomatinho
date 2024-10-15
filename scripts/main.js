@@ -28,19 +28,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // NAVEGAÇÃO POR GESTOS
 
+// NAVEGAÇÃO POR GESTOS
+
 const pages = [
     "index.html",
     "nav.html",
-    "capitulo1.html",
-    "capitulo2.html",
-    "capitulo3.html"
+    "capitulos/capitulo1.html",
+    "capitulos/capitulo2.html",
+    "capitulos/capitulo3.html"
     // Adicione mais capítulos conforme necessário
 ];
 
 // Função para obter o índice da página atual
 function getCurrentPageIndex() {
-    const currentPage = window.location.pathname;
-    return pages.findIndex(page => currentPage.endsWith(page));
+    const currentPage = window.location.pathname.split("/").pop(); // Obtém o nome do arquivo atual
+    return pages.findIndex(page => page === currentPage); // Compara com os nomes no array pages
 }
 
 // Função para navegar para a página anterior
@@ -59,6 +61,9 @@ function goToNextPage() {
     }
 }
 
+// Variável para armazenar o ponto inicial do toque
+let startX;
+
 // Evento de toque inicial
 function touchStart(event) {
     startX = event.touches[0].clientX; 
@@ -76,6 +81,7 @@ function touchEnd(event) {
     }
 }
 
+// Adiciona os eventos de toque à página
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("touchstart", touchStart); 
     document.addEventListener("touchend", touchEnd);    

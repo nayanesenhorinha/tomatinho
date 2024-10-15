@@ -26,13 +26,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-
 // NAVEGAÇÃO POR GESTOS
 
 const pages = [
     "index.html",
     "nav.html",
-    "capitulos/capitulo1.html",
+    "capitulo1.html",
     "capitulo2.html",
     "capitulo3.html"
     // Adicione mais capítulos conforme necessário

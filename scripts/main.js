@@ -32,8 +32,8 @@ let startX;
 const pages = [
     "../index.html",
     "../nav.html",
-    "capitulo1.html",
-    "capitulo2.html",
+    "../capitulo1.html",
+    "../capitulo2.html",
     // Adicione mais páginas conforme necessário
     "capitulo25.html"
 ];

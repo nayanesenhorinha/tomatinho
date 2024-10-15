@@ -1,0 +1,11 @@
+{
+  "name": "tomatinho",
+  "version": "1.0.0",
+  "description": "projeto de tcc ",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nayane de Souza",
+  "license": "ISC"
+}

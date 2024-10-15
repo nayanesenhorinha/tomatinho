@@ -34,17 +34,17 @@ const pages = [
     "nav.html",
     "capitulos/capitulo1.html",
     "capitulos/capitulo2.html",
-    "capitulos/capitulo3.html",
-    // Continue adicionando os capítulos até o capitulo25.html
+    // Adicione mais capítulos conforme necessário
+    "capitulos/capitulo25.html"
 ];
 
 // Função para obter o índice da página atual
 function getCurrentPageIndex() {
-    // Obtém o nome do arquivo atual da URL
-    const currentPage = window.location.pathname.split("/").pop();
-    
-    // Retorna o índice da página atual no array
-    return pages.findIndex(page => page === currentPage);
+    // Obtém o caminho completo da página atual (incluindo o diretório)
+    const currentPage = window.location.pathname;
+
+    // Procura no array de páginas o caminho completo da página atual
+    return pages.findIndex(page => currentPage.endsWith(page));
 }
 
 // Função para navegar para a página anterior

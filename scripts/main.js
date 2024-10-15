@@ -23,63 +23,70 @@ document.addEventListener("DOMContentLoaded", function() {
          document.title = currentTitle + " | As Aventuras de Alice no País das Maravilhas";
     }
 
+});
 
-    let startX;
+// Variável para armazenar o ponto inicial do toque
+let startX;
 
-        // Array com a ordem das páginas
-        const pages = [
-            "index.html",
-            "nav.html",
-            "capitulo1.html",
-            "capitulo2.html",
-            // Adicione mais páginas conforme necessário
-            "capitulo25.html"
-        ];
+// Array com a ordem das páginas (incluindo o caminho relativo)
+const pages = [
+    "../index.html",
+    "../nav.html",
+    "capitulo1.html",
+    "capitulo2.html",
+    // Adicione mais páginas conforme necessário
+    "capitulo25.html"
+];
 
-        // Função para obter o índice da página atual
-        function getCurrentPageIndex() {
-            const currentPage = window.location.pathname.split("/").pop();
-            return pages.indexOf(currentPage);
-        }
+// Função para obter o índice da página atual
+function getCurrentPageIndex() {
+    const currentPage = window.location.pathname.split("/").pop();
+    
+    // Para capitulos/, ajusta para o nome da página atual
+    if (window.location.pathname.includes("capitulos/")) {
+        return pages.indexOf(currentPage);
+    } else {
+        return pages.indexOf("../" + currentPage);
+    }
+}
 
-        // Função para navegar para a página anterior
-        function goToPreviousPage() {
-            const currentIndex = getCurrentPageIndex();
-            if (currentIndex > 0) {
-                window.location.href = pages[currentIndex - 1];
-            }
-        }
+// Função para navegar para a página anterior
+function goToPreviousPage() {
+    const currentIndex = getCurrentPageIndex();
+    if (currentIndex > 0) {
+        window.location.href = (currentIndex > 1 ? "capitulos/" : "") + pages[currentIndex - 1];
+    }
+}
 
-        // Função para navegar para a próxima página
-        function goToNextPage() {
-            const currentIndex = getCurrentPageIndex();
-            if (currentIndex < pages.length - 1) {
-                window.location.href = pages[currentIndex + 1];
-            }
-        }
+// Função para navegar para a próxima página
+function goToNextPage() {
+    const currentIndex = getCurrentPageIndex();
+    if (currentIndex < pages.length - 1) {
+        window.location.href = (currentIndex >= 1 ? "capitulos/" : "") + pages[currentIndex + 1];
+    }
+}
 
-        // Evento de toque inicial
-        function touchStart(event) {
-            startX = event.touches[0].clientX; // Captura a posição inicial do toque
-        }
+// Evento de toque inicial
+function touchStart(event) {
+    startX = event.touches[0].clientX; // Captura a posição inicial do toque
+}
 
-        // Evento de movimento de toque
-        function touchEnd(event) {
-            const endX = event.changedTouches[0].clientX; // Captura a posição final do toque
-            const deltaX = endX - startX; // Diferença entre o ponto inicial e final do toque
+// Evento de movimento de toque
+function touchEnd(event) {
+    const endX = event.changedTouches[0].clientX; // Captura a posição final do toque
+    const deltaX = endX - startX; // Diferença entre o ponto inicial e final do toque
 
-            if (deltaX > 50) {
-                // Deslize para a direita (volta à página anterior)
-                goToPreviousPage();
-            } else if (deltaX < -50) {
-                // Deslize para a esquerda (avança à próxima página)
-                goToNextPage();
-            }
-        }
+    if (deltaX > 50) {
+        // Deslize para a direita (volta à página anterior)
+        goToPreviousPage();
+    } else if (deltaX < -50) {
+        // Deslize para a esquerda (avança à próxima página)
+        goToNextPage();
+    }
+}
 
-        // Adiciona os eventos de toque à página
-        document.addEventListener("DOMContentLoaded", function () {
-            document.addEventListener("touchstart", touchStart); // Quando o toque começa
-            document.addEventListener("touchend", touchEnd);     // Quando o toque termina
-        });
+// Adiciona os eventos de toque à página
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("touchstart", touchStart); // Quando o toque começa
+    document.addEventListener("touchend", touchEnd);     // Quando o toque termina
 });

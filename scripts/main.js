@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // NAVEGAÇÃO POR GESTOS
 
 // NAVEGAÇÃO POR GESTOS
+// NAVEGAÇÃO POR GESTOS
 
 const pages = [
     "index.html",
@@ -49,7 +50,7 @@ function getCurrentPageIndex() {
 function goToPreviousPage() {
     const currentIndex = getCurrentPageIndex();
     if (currentIndex > 0) {
-        window.location.href = pages[currentIndex - 1];
+        window.location.href = pages[currentIndex - 1]; // Navega para a página anterior
     }
 }
 
@@ -57,7 +58,7 @@ function goToPreviousPage() {
 function goToNextPage() {
     const currentIndex = getCurrentPageIndex();
     if (currentIndex < pages.length - 1) {
-        window.location.href = pages[currentIndex + 1];
+        window.location.href = pages[currentIndex + 1]; // Navega para a próxima página
     }
 }
 
@@ -75,9 +76,9 @@ function touchEnd(event) {
     const deltaX = endX - startX; 
 
     if (deltaX > 50) {
-        goToPreviousPage();
+        goToPreviousPage(); // Deslizar para a direita
     } else if (deltaX < -50) {
-        goToNextPage();
+        goToNextPage(); // Deslizar para a esquerda
     }
 }
 

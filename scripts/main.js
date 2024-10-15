@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var currentTitle = document.title;
+    let currentTitle = document.title;
+    let startX;
 
     function addMeta(name, content) {
         var meta = document.createElement('meta');
@@ -25,25 +26,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// Variável para armazenar o ponto inicial do toque
-let startX;
 
-// Array com a ordem das páginas (incluindo o caminho relativo)
+// NAVEGAÇÃO POR GESTOS
+
 const pages = [
     "index.html",
     "nav.html",
     "capitulos/capitulo1.html",
     "capitulo2.html",
+    "capitulo3.html"
     // Adicione mais capítulos conforme necessário
-    "capitulo25.html"
 ];
 
 // Função para obter o índice da página atual
 function getCurrentPageIndex() {
-    // Obtém o caminho completo da página atual (incluindo o diretório)
     const currentPage = window.location.pathname;
-
-    // Procura no array de páginas o caminho completo da página atual
     return pages.findIndex(page => currentPage.endsWith(page));
 }
 
@@ -65,25 +62,22 @@ function goToNextPage() {
 
 // Evento de toque inicial
 function touchStart(event) {
-    startX = event.touches[0].clientX; // Captura a posição inicial do toque
+    startX = event.touches[0].clientX; 
 }
 
 // Evento de movimento de toque
 function touchEnd(event) {
-    const endX = event.changedTouches[0].clientX; // Captura a posição final do toque
-    const deltaX = endX - startX; // Diferença entre o ponto inicial e final do toque
+    const endX = event.changedTouches[0].clientX;
+    const deltaX = endX - startX; 
 
     if (deltaX > 50) {
-        // Deslize para a direita (volta à página anterior)
         goToPreviousPage();
     } else if (deltaX < -50) {
-        // Deslize para a esquerda (avança à próxima página)
         goToNextPage();
     }
 }
 
-// Adiciona os eventos de toque à página
 document.addEventListener("DOMContentLoaded", function () {
-    document.addEventListener("touchstart", touchStart); // Quando o toque começa
-    document.addEventListener("touchend", touchEnd);     // Quando o toque termina
+    document.addEventListener("touchstart", touchStart); 
+    document.addEventListener("touchend", touchEnd);    
 });

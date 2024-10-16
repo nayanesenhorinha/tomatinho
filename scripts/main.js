@@ -53,7 +53,7 @@ function getCurrentGeneralPageIndex() {
 // Função para obter o índice da página atual nos capítulos
 function getCurrentChapterPageIndex() {
     const currentPage = window.location.pathname.split("/").pop(); // Obtém o nome do arquivo atual
-    return chapterPages.findIndex(page => currentPage === `capitulos/${page}`);
+    return chapterPages.findIndex(page => currentPage === `capitulos/${currentPage}`);
 }
 
 // Função para navegar para a página anterior (páginas gerais)
@@ -102,7 +102,7 @@ function touchEnd(event) {
     const deltaX = endX - startX;
 
     // Navegação para páginas gerais (index.html e nav.html)
-    if (window.location.pathname.includes("index.html") || window.location.pathname.includes("nav.html")) {
+    if (window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("nav.html")) {
         if (deltaX > 50) {
             goToPreviousGeneralPage(); // Deslizar para a direita
         } else if (deltaX < -50) {

@@ -28,29 +28,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // NAVEGAÇÃO POR GESTOS
 
-// NAVEGAÇÃO POR GESTOS
-// NAVEGAÇÃO POR GESTOS
-
 const pages = [
     "index.html",
     "nav.html",
-    "capitulos/capitulo1.html",
-    "capitulos/capitulo2.html",
-    "capitulos/capitulo3.html"
+    "../capitulos/capitulo1.html",
+    "../capitulo2.html",
+    "../sscapitulo3.html"
     // Adicione mais capítulos conforme necessário
 ];
 
 // Função para obter o índice da página atual
 function getCurrentPageIndex() {
-    const currentPage = window.location.pathname.split("/").pop(); // Obtém o nome do arquivo atual
-    return pages.findIndex(page => page === currentPage); // Compara com os nomes no array pages
+    const currentPage = window.location.pathname;
+    return pages.findIndex(page => currentPage.endsWith(page));
 }
 
 // Função para navegar para a página anterior
 function goToPreviousPage() {
     const currentIndex = getCurrentPageIndex();
     if (currentIndex > 0) {
-        window.location.href = pages[currentIndex - 1]; // Navega para a página anterior
+        window.location.href = pages[currentIndex - 1];
     }
 }
 
@@ -58,12 +55,9 @@ function goToPreviousPage() {
 function goToNextPage() {
     const currentIndex = getCurrentPageIndex();
     if (currentIndex < pages.length - 1) {
-        window.location.href = pages[currentIndex + 1]; // Navega para a próxima página
+        window.location.href = pages[currentIndex + 1];
     }
 }
-
-// Variável para armazenar o ponto inicial do toque
-let startX;
 
 // Evento de toque inicial
 function touchStart(event) {
@@ -76,13 +70,12 @@ function touchEnd(event) {
     const deltaX = endX - startX; 
 
     if (deltaX > 50) {
-        goToPreviousPage(); // Deslizar para a direita
+        goToPreviousPage();
     } else if (deltaX < -50) {
-        goToNextPage(); // Deslizar para a esquerda
+        goToNextPage();
     }
 }
 
-// Adiciona os eventos de toque à página
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("touchstart", touchStart); 
     document.addEventListener("touchend", touchEnd);    
